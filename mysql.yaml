@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysqla
+  labels:
+    app: mysqlb
+spec:
+  containers:
+  - name: mysqlc
+    image: mysql:5.7
+    ports:
+    - containerPort: 3306
+    env:
+      - name: MYSQL_ROOT_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: mysql-secret
+            key: mysql-root
+      - name: MYSQL_DATABASE 
+        valueFrom:
+          secretKeyRef:
+            name: mysql-secret
+            key: mysql-database
